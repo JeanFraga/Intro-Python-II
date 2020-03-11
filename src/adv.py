@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -49,3 +50,22 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+player = input("Player name: ")
+player = Player(player)
+print(player)
+action = None
+while action != "q":
+    choices = [ "n", "s", "e", "w"]
+    action = input("You can move North(n), South(s), East(e), West(w). Type (q) to Quit. Enter choice:\n")
+
+    if action == "n":
+
+    if action == "s":
+    
+    if action == "e":
+
+    if action == "w":
+
+    if action not in choices:
+        print("Entered wrong choice. \n")
