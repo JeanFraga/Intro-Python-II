@@ -4,20 +4,20 @@ from player import Player
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
+    'outside':  Room("Outside Cave Entrance\n",
                      "North of you, the cave mount beckons"),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
+    'foyer':    Room("Foyer\n", """Dim light filters in from the south. Dusty
 passages run north and east."""),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
+    'overlook': Room("Grand Overlook\n", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm."""),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
+    'narrow':   Room("Narrow Passage\n", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
+    'treasure': Room("Treasure Chamber\n", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
@@ -51,21 +51,29 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-player = input("Player name: ")
-player = Player(player)
+def checklegal(action):
+    # if 
+        return False
+
+name = input("Player name: ")
+if name == "":
+    name = "Jhon"
+player = Player(name, room['outside'])
 print(player)
 action = None
 while action != "q":
-    choices = [ "n", "s", "e", "w"]
-    action = input("You can move North(n), South(s), East(e), West(w). Type (q) to Quit. Enter choice:\n")
+    exitgame = {"q":"q"}
+    choices = { "n":"n_to", "s":"s_to", "e":"e_to", "w":"w_to", "q":"q"}
+    action = input("You can try to move North(n), South(s), East(e), West(w). Type (q) to Quit. Enter choice: ")
 
-    if action == "n":
+    if action in choices:
+        # print(choices[action])
+        player = Player(name, room["outside"].n_to)
 
-    if action == "s":
-    
-    if action == "e":
+        print(player)
 
-    if action == "w":
-
-    if action not in choices:
+    if action not in (choices or exitgame):
         print("Entered wrong choice. \n")
+
+    if action == "q":
+        print("\nThank you for playing! Come again :D\n")

@@ -7,4 +7,4 @@ class Room(Player):
         super().__init__(name, room)
         # self.attributes = attributes
     def __str__(self):
-        return f"{self.name} is in room {self.room}"
+        return f"{self.name}{self.room}"
