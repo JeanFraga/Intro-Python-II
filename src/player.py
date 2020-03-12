@@ -2,8 +2,12 @@
 # currently.
 
 class Player:
-    def __init__(self, name, room):
+    def __init__(self, name, current_room):
         self.name = name
-        self.room = room
-    def __str__(self):
-        return f"\n{self.name} is in room {self.room}\n"
+        self.current_room = current_room
+    def travel(self, direction):
+        if getattr(self.current_room, f"{direction}_to"):
+            self.current_room = getattr(self.current_room, f"{direction}_to")
+            print(self.current_room)
+        else:
+            print("You cannot move in that direction")
