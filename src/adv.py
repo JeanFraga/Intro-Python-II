@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from itemClass import Item, Food, Egg
 
 # Declare all the rooms
 
@@ -33,6 +35,14 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+rock = Item("rock", "This is a rock.")
+sandwich = Food("sandwich", "This is a delicious sandwich.", 100)
+egg = Egg()
+
+room['outside'].items.append(rock)
+room['overlook'].items.append(sandwich)
+room['treasure'].items.append(egg)
+
 #
 # Main
 #
@@ -49,3 +59,33 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+name = input("Player name: ")
+if name == "":
+    name = "Jhon"
+player = Player(name, room['outside'])
+print(f"Hello {player.name}")
+print(player.current_room)
+action = None
+valid_directions = ("n", "s", "e", "w")
+while action != "q":
+    # print(room['outside'].items[0])
+    action = input("\n~~> ")
+    if action == "q":
+        print("\nThank you for playing! Come again :D\n")
+    # if action == "q":
+    #     print("Goodbye!")
+    #     exit(0)
+    elif action in valid_directions:
+        player.travel(action)
+    elif action == "i":
+        player.print_inventory()
+    elif "get" in action:
+        action = action.split(" ")[1]
+        if getattr(room.items, f"{action}"):
+            player.items.append(getattr(room.items, f"{action}"))
+            print(f"picked up {action}")
+        else:
+            print("Item does not exist in this room.")
+    else:
+        print("I did not understand that command")
